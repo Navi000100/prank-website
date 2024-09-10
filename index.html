@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Hacking Prank</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #00FF00;
+        }
+
+        #nameInput, #startButton {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        #hackingScreen {
+            display: none;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: left;
+            white-space: pre-line;
+            margin: 20px;
+        }
+
+        #loadingBar {
+            margin: 10px auto;
+            height: 25px;
+            width: 80%;
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #loadingBarProgress {
+            height: 100%;
+            width: 0;
+            background-color: #00FF00;
+            transition: width 0.1s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter your name to continue</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name here">
+    <button id="startButton">Enter</button>
+
+    <div id="hackingScreen">
+        <h2>Hacking in progress...</h2>
+        <div id="loadingBar">
+            <div id="loadingBarProgress"></div>
+        </div>
+        <p id="hackingText"></p>
+    </div>
+
+    <script>
+        const startButton = document.getElementById('startButton');
+        const nameInput = document.getElementById('nameInput');
+        const hackingScreen = document.getElementById('hackingScreen');
+        const hackingText = document.getElementById('hackingText');
+        const loadingBarProgress = document.getElementById('loadingBarProgress');
+
+        // Sample hacking text
+        const fakeHackingSteps = [
+            "Connecting to phone...",
+            "Bypassing encryption...",
+            "Accessing contacts...",
+            "Stealing photos...",
+            "Extracting messages...",
+            "Gaining control of the microphone...",
+            "Unlocking bank accounts...",
+            "Sending data to remote server...",
+            "Complete! Phone hacked."
+        ];
+
+        // Function to simulate the fake hacking process
+        function startHacking() {
+            let step = 0;
+            const hackingInterval = setInterval(() => {
+                if (step < fakeHackingSteps.length) {
+                    hackingText.textContent += fakeHackingSteps[step] + "\n";
+                    step++;
+                    loadingBarProgress.style.width = (step / fakeHackingSteps.length) * 100 + "%";
+                } else {
+                    clearInterval(hackingInterval);
+                }
+            }, 1500); // Change text every 1.5 seconds
+        }
+
+        // Start hacking when "Enter" is pressed
+        startButton.addEventListener('click', () => {
+            const userName = nameInput.value;
+            if (userName.trim()) {
+                document.body.innerHTML = `<h1>Welcome, ${userName}! Initiating phone hack...</h1>`;
+                setTimeout(() => {
+                    hackingScreen.style.display = 'block';
+                    startHacking();
+                }, 2000); // Wait 2 seconds before starting the hack
+            } else {
+                alert("Please enter your name.");
+            }
+        });
+    </script>
+</body>
+</html>
